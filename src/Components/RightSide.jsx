@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UpComingEvent from "./UpComingEvent";
 // import Skeleton from "react-loading-skeleton";
@@ -10,6 +10,7 @@ axios.defaults.withCredentials = true;
 
 const RightSide = ({ loggedUserData }) => {
   console.log("right side", loggedUserData);
+  const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(true);
   const [isProfieLoading, setIsProfileLoading] = useState(true);
@@ -70,7 +71,7 @@ const RightSide = ({ loggedUserData }) => {
             <span className="text-sm font-semibold font-poppins">
               Upcoming Event
             </span>
-            <span className="text-xs text-orange  max-[1067px]:hidden">
+            <span onClick={()=>navigate('/events')} className="text-xs text-orange  max-[1067px]:hidden">
               View All
             </span>
           </div>

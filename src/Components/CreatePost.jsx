@@ -54,6 +54,7 @@ const CreatePost = ({ loggedUserData }) => {
                 <UserCreate
                   props={handleBoolValueChange}
                   loggedUserData={loggedUserData}
+                  setIsCreate={setIsCreate}
                 />
               ) : (
                 <div>{alert("Something went wrong")}</div>

@@ -10,7 +10,6 @@ const UserProvider = ({ children }) => {
    const [userDetails, setUserDetails] = useState(null);
 
    const fetchProfile = () =>{
-      debugger
       const acessToken = localStorage.getItem('token');
 
       if (acessToken) {
@@ -20,6 +19,7 @@ const UserProvider = ({ children }) => {
             },
          }).then((res) => {
             setUserDetails(res.data.user);
+            localStorage.setItem('_id', (res.data.user._id));
          }).catch((err) => {
             toast.error(err)
          });

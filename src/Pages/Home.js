@@ -14,6 +14,9 @@ import { Link, useNavigate } from "react-router-dom";
 import LeftSide from "../Components/LeftSide";
 import MiddleSide from "../Components/MiddleSide";
 import RightSide from "../Components/RightSide";
+import { Facts } from "../Components/Facts";
+import { toast } from "react-toastify";
+import { message } from "antd";
 
 const { BaseLayer } = LayersControl;
 
@@ -28,8 +31,28 @@ export default function Map() {
   });
 
   useEffect(() => {
+    const hasSeenFacts = sessionStorage.getItem("hasSeenFacts");
+    if (!hasSeenFacts) {
+      console.log("not seen");
+      fetchRandomFacts();
+      sessionStorage.setItem("hasSeenFacts", "true");
+    }
     fetchProfile();
   }, []);
+
+  const fetchRandomFacts = () => {
+    const randomIndex = Math.floor(Math.random() * Facts.length);
+    const randomFact = Facts[randomIndex];
+
+    // toast.info(`Quote: ${randomFact.quote}\nAuthor: ${randomFact.author}`);
+    message.info(`Quote: ${randomFact.quote}\nAuthor: ${randomFact.author}`);
+
+    // Hide the fact after 5 seconds
+    setTimeout(() => {
+      console.log("Fact hidden");
+    }, 5000);
+  };
+
 
   useEffect(() => {
     if (!map) return;

@@ -3,13 +3,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { axios_auth } from "../Library/Library";
 import { UserContext } from "../Context/UserProfile";
+import { toast } from "react-toastify";
 axios.defaults.withCredentials = true;
 
 const Suggestions = ({ suggestedUserProfile }) => {
   const { userDetails, fetchProfile } = useContext(UserContext);
-
-  console.log(suggestedUserProfile?._id);
-  console.log(userDetails?._id);
 
   useEffect(() => {
     fetchProfile();
@@ -29,16 +27,16 @@ const Suggestions = ({ suggestedUserProfile }) => {
         }
       )
       .then(() => {
-        alert("Successfully Added!, Now you can chat");
+        toast.success("Successfully Added!, Now you can chat");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err.message));
   };
 
   return (
     <>
       <div className="flex flex-row gap-x-1 w-full p-3 space-x-2 rounded-md border border-black items-start justify-end select-none">
-        <div className="w-[27%] cursor-pointer">
-          <Link to={`/profile/${suggestedUserProfile._id}`}>
+        <div className="w-[15%] =">
+          <div to={`/profile/${suggestedUserProfile._id}`}>
             {suggestedUserProfile && suggestedUserProfile.profilePic ? (
               <img
                 src={suggestedUserProfile.profilePic}
@@ -58,13 +56,13 @@ const Suggestions = ({ suggestedUserProfile }) => {
                 className="w-[3rem] h-[3rem]  max-[1067px]:w-[2rem]  max-[1067px]:h-[2rem] rounded-full"
               />
             )}
-          </Link>
+          </div>
         </div>
         <div className="w-[50%] flex flex-col gap-y-1">
           <span className="text-sm font-poppins font-semibold overflow-x-hidden  max-[1067px]:text-xs">
             {suggestedUserProfile.username}
           </span>
-          <span className="text-sm font-poppins font-semibold overflow-x-hidden  max-[1067px]:text-xs">
+          <span className="text-sm text-userblue font-poppins font-semibold overflow-x-hidden  max-[1067px]:text-xs">
             {suggestedUserProfile.who}
           </span>
         </div>

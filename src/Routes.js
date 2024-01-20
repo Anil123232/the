@@ -13,7 +13,10 @@ const Login = lazy(() => import("./Pages/Login"));
 const Home = lazy(() => import("./Pages/Home"));
 
 const Register = lazy(() => import("./Pages/Register"));
-const Events = lazy(() => import("./Pages/Events"));
+const EventsPage = lazy(() => import("./Pages/EventsPage"));
+
+const Predictor = lazy(() => import("./Pages/Predictor"));
+const Profile = lazy(() => import("./Pages/Profile"));
 
 const AppRoute = () => {
   return (
@@ -23,9 +26,11 @@ const AppRoute = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/events" element={<EventsPage />} />
           <Route path="/organizer" element={<Organizer />} />
           <Route path="/message" element={<Message/>} />
+          <Route path="/predictor" element={<Predictor/>} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
       </Suspense>
       <ToastContainer />

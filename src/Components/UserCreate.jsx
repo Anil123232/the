@@ -13,7 +13,7 @@ const DefaultLocation = {
   lat: 26.7935883,
   lng: 87.2927818  }
 
-const UserCreate = ({ props, loggedUserData }) => {
+const UserCreate = ({ props, loggedUserData,setIsCreate }) => {
   const [content, setContent] = useState("");
   const [imageSrc, setImageSrc] = useState();
   const [img, setImg] = useState(null);
@@ -74,10 +74,9 @@ const UserCreate = ({ props, loggedUserData }) => {
 
         const createPost = async () => {
           try {
-            const response = axios_auth.post("/api/v1/post/createPost", data);
-            toast.success("Successfully Updated!  ");
-            toast.success("post added successfully");
-            console.log(response.data.result);
+            const response = axios_auth.post("/api/v1/post/createPost", data).then(()=>window.location.reload());
+            toast.success("Post added successfully");
+            
           } catch (error) {
             console.log("Error:", error);
           }

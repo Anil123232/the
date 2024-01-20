@@ -5,8 +5,10 @@ import { AiFillMessage } from "react-icons/ai";
 import { MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { MdEmojiEvents } from "react-icons/md";
-import { RiOrganizationChart } from "react-icons/ri";
+import { RiOrganizationChart, RiRobotLine } from "react-icons/ri";
 import axios from "axios";
+import { RobotFilled, RobotOutlined } from "@ant-design/icons";
+import logo from '../logo.svg'
 axios.defaults.withCredentials = true;
 
 const LeftSide = () => {
@@ -27,10 +29,7 @@ const LeftSide = () => {
         {/* logo */}
         <Link to="/">
           <div className="w-full flex flex-col items-center justify-center cursor-pointer select-none">
-            <span className="text-usergreen font-poppins font-bold text-xl md:text-2xl tracking-wide leading-relaxed">
-              The Green
-            </span>
-            <span className="font-poppins text-black text-base">Area</span>
+           <img src={logo} className="w-44 h-24" alt="Logo" />
           </div>
         </Link>
         {/* icons  */}
@@ -69,6 +68,15 @@ const LeftSide = () => {
                   <RiOrganizationChart color="#44AE26" size={25} />
                 </i>
                 <span className="font-poppins">Organizers</span>
+              </div>
+            </Link>
+
+            <Link to="/predictor">
+              <div className="flex gap-x-4 items-center justify-center cursor-pointer">
+                <i>
+                  <RiRobotLine color="#44AE26" size={25} />
+                </i>
+                <span className="font-poppins">Predictor</span>
               </div>
             </Link>
 

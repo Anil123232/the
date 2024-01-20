@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { showLoading } from "../Components/Loading";
 import { toast } from "react-toastify";
 import axios from "axios";
+import logo from '../logo.svg'
+
 
 import Input from "../Components/Input";
 
@@ -83,11 +85,11 @@ const Login = () => {
     <>
       <div className="relative flex flex-col justify-center min-h-screen overflow-x-hidden max-sm:block ">
         <div className="w-full p-6 m-auto bg-cardBg rounded-md shadow-xl sm:max-w-xl border ">
-          <h1 className="w-full m-auto -ml-1 flex -my-14 justify-center"></h1>
-          <h2 className="text-xl mt-1 font-semibold text-center text-text_ ">
-            Sign in
-          </h2>
-          <form className="mt-6" onSubmit={formik.handleSubmit}>
+          <h1 className="w-full m-auto -ml-1 flex -my-14 justify-center">
+          <img src={logo} className="w-48 h-24 mb-8" alt="Logo" />
+          </h1>
+
+          <form className="mt-8" onSubmit={formik.handleSubmit}>
             <Input
               formik={formik}
               Icon={<FaMailchimp />}
