@@ -4,6 +4,7 @@ import UserCreate from "./UserCreate";
 const CreatePost = ({ loggedUserData }) => {
   const [isCreate, setIsCreate] = useState(false);
 
+
   const handleBoolValueChange = (newValue) => {
     setIsCreate(newValue);
   };
@@ -38,7 +39,7 @@ const CreatePost = ({ loggedUserData }) => {
             onClick={handleBoolValueChange}
           >
             <span className="font-poppins text-xs select-none">
-              What's on your mind? Anil ...
+              What's on your mind? {loggedUserData?.username}
             </span>
           </div>
         </div>

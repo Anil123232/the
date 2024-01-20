@@ -38,7 +38,7 @@ const MiddleSide = ({ loggedUserData }) => {
     };
 
     fetchData();
-  }, []);
+  }, [showModal]);
 
   const handleCardClick = (e, postData) => {
     e.preventDefault();
@@ -63,6 +63,7 @@ const MiddleSide = ({ loggedUserData }) => {
                 <>
                   <div key={val._id} onClick={(e) => handleCardClick(e, val)}>
                     <Card
+                    modal={showModal}
                       setShowModal={setShowModal}
                       updateState={updateState}
                       postData={val}
