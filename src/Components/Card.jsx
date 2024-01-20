@@ -35,37 +35,34 @@ const Card = ({
     sendRequestComment().then((data) => setAllComment(data.comments.length));
   }, []);
 
-
   return (
     <>
       <div className="w-full md:pl-4 pt-4 pb-4 flex flex-col gap-y-2 select-none">
         <div className="flex items-center justify-between">
           <div className="flex gap-x-5 items-center">
             <div className="picture">
-              <Link to={`/profile/${postOwner._id}`}>
-                {postOwner && postOwner.profilePic ? (
-                  <img
-                    src={postOwner.profilePic}
-                    alt="other-profile-pic"
-                    className="w-[4rem] h-[4rem] rounded-full bg-contain"
-                    style={{ objectFit: "cover" }}
-                  />
-                ) : postOwner && postOwner.gender === "male" ? (
-                  <img
-                    src="../assets/images/male-avatar.png"
-                    alt="other-profile-pic"
-                    className="w-[4rem] h-[4rem] rounded-full bg-contain"
-                    style={{ objectFit: "cover" }}
-                  />
-                ) : (
-                  <img
-                    src="../assets/images/female-avatar.png"
-                    alt="other-profile-pic"
-                    className="w-[4rem] h-[4rem] rounded-full bg-contain"
-                    style={{ objectFit: "cover" }}
-                  />
-                )}
-              </Link>
+              {postOwner && postOwner.profilePic ? (
+                <img
+                  src={postOwner.profilePic}
+                  alt="other-profile-pic"
+                  className="w-[4rem] h-[4rem] rounded-full bg-contain"
+                  style={{ objectFit: "cover" }}
+                />
+              ) : postOwner && postOwner.gender === "male" ? (
+                <img
+                  src="../assets/images/male-avatar.png"
+                  alt="other-profile-pic"
+                  className="w-[4rem] h-[4rem] rounded-full bg-contain"
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <img
+                  src="../assets/images/female-avatar.png"
+                  alt="other-profile-pic"
+                  className="w-[4rem] h-[4rem] rounded-full bg-contain"
+                  style={{ objectFit: "cover" }}
+                />
+              )}
             </div>
 
             <div className="flex flex-col gap-y-1">
@@ -154,7 +151,9 @@ const Card = ({
               <div className="w-[70%] md:p-4">
                 <div className="flex items-center mb-2">
                   <IoLocation color="#44AE26" size={20} />
-                  <span className="font-poppins text-xs ">{postData.location}</span>
+                  <span className="font-poppins text-xs ">
+                    {postData.location}
+                  </span>
                 </div>
                 <span className="line-clamp-6 font-opensans text-sm leading-normal tracking-wide cursor-pointer p-1">
                   {postData.content}

@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
-import { BiSearch } from "react-icons/bi";
-import { TbMessageCircle2Filled } from "react-icons/tb";
-import { MdNotifications, MdLogout } from "react-icons/md";
+import { AiFillMessage } from "react-icons/ai";
+import { MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { MdEmojiEvents } from "react-icons/md";
 import { RiOrganizationChart } from "react-icons/ri";
-import Search from "./Search";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const LeftSide = () => {
   const navigate = useNavigate();
-  const [searchBar, setSearchBar] = useState(false);
 
   const handleLogout = () => {
     // remove the token from localStorage
@@ -48,17 +45,16 @@ const LeftSide = () => {
               </div>
             </Link>
 
-            <div
-              className="flex gap-x-4 items-center justify-center cursor-pointer"
-              //   onClick={() => setSearchBar(true)}
-            >
-              <i>
-                <BiSearch color="#44AE26" size={25} />
-              </i>
-              <span className="font-poppins">Search</span>
-            </div>
-
             <Link to="/message">
+              <div className="flex gap-x-4 items-center justify-center cursor-pointer">
+                <i>
+                  <AiFillMessage color="#44AE26" size={25} />
+                </i>
+                <span className="font-poppins">Message</span>
+              </div>
+            </Link>
+
+            <Link to="/events">
               <div className="flex gap-x-4 items-center justify-center cursor-pointer">
                 <i>
                   <MdEmojiEvents color="#44AE26" size={25} />
@@ -67,7 +63,7 @@ const LeftSide = () => {
               </div>
             </Link>
 
-            <Link to="/tips">
+            <Link to="/organizer">
               <div className="flex gap-x-4 items-center justify-center cursor-pointer">
                 <i>
                   <RiOrganizationChart color="#44AE26" size={25} />
@@ -88,37 +84,6 @@ const LeftSide = () => {
           </div>
         </div>
       </div>
-
-      {/* for search  */}
-      {searchBar ? (
-        <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none shadow-2xl">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/* <Search props={handleBoolValueChange} /> */}
-            </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : (
-        ""
-      )}
-
-      {/* {notificationBar ? (
-        <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none shadow-2xl">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <Notification
-                props={handleBoolValueChangeNotification}
-                likeCommentNotifications={likeCommentNotifications}
-                followNotifications={followNotifications}
-              />
-            </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : (
-        ""
-      )} */}
     </>
   );
 };
