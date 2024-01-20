@@ -1,14 +1,31 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiPhoto } from "react-icons/hi2";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { axios_auth } from "../Library/Library";
+import { DatePicker, Input, Select } from "antd";
+import MapPicker from "react-google-map-picker";
+import { UserContext } from "../Context/UserProfile";
+import { district } from "./Districts";
+const DefaultZoom = 10;
+const DefaultLocation = {
+  lat: 26.7935883,
+  lng: 87.2927818  }
 
 const UserCreate = ({ props, loggedUserData }) => {
   const [content, setContent] = useState("");
   const [imageSrc, setImageSrc] = useState();
   const [img, setImg] = useState(null);
+  const [date, setDate] = useState(null);
+  const [location, setLocation] = useState();
+  const [defaultLocation, setDefaultLocation] = useState();
+  const [zoom, setZoom] = useState(DefaultZoom);
+  const {userDetails} = useContext(UserContext)
+
+  function handleChangeZoom (newZoom){
+    setZoom(newZoom);
+  }
 
   function handleOnChange(changeEvent) {
     const reader = new FileReader();
@@ -25,6 +42,8 @@ const UserCreate = ({ props, loggedUserData }) => {
   async function imageUpload() {
     console.log("hellotoat");
     try {
+      const isEvent = userDetails.role == 'staff' ? true : false
+
       const data = new FormData();
       data.append("file", img);
       data.append("upload_preset", "rijoqnuu");
@@ -48,6 +67,9 @@ const UserCreate = ({ props, loggedUserData }) => {
         const data = {
           picture: x,
           content,
+          location,
+          datePick:date,
+          isEvent
         };
 
         const createPost = async () => {
@@ -69,14 +91,30 @@ const UserCreate = ({ props, loggedUserData }) => {
   }
 
   const handleSubmitPost = () => {
+    console.log(img)
     if (img) {
       imageUpload();
     } else {
       const data = {
         content,
+        
       };
     }
   };
+
+  function handleChangeLocation (lat, lng){
+    setLocation({lat:lat, lng:lng});
+  }
+  
+  function handleResetLocation(){
+    setDefaultLocation({ ... {
+      lat: 26.7935883,
+      lng: 87.2927818,
+      zoom: 13,
+    }});
+    setZoom(DefaultZoom);
+  }
+
 
   return (
     <>
@@ -126,6 +164,36 @@ const UserCreate = ({ props, loggedUserData }) => {
             placeholder="Write your thoughts here..."
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
+
+         {
+          userDetails.role === 'staff'?  <DatePicker 
+          className="w-full"
+          onChange={(e)=>{setDate(e);debugger}}
+          value={date}
+          />
+          : <></>
+         }
+                    {/* <MapPicker defaultLocation={{
+  lat: 26.7935883,
+  lng: 87.2927818  }}
+    mapTypeId="roadmap"
+    zoom={zoom}
+    style={{height:'400px'}}
+    onChangeZoom={handleChangeZoom}
+    onChangeLocation={handleChangeLocation} 
+    apiKey='AIzaSyAsOiVFoj7et2Q8qKfbyPy-_nwVOCGpITg'/> */}
+    <Select 
+    showSearch
+    placeholder="Location"
+    className="w-full"
+    onChange={(e)=>{setLocation(e);debugger}}
+filterOption={district}
+options={district}
+    />
+    
+
+    
+
           <div
             className="w-full py-2 px-2 bg-usergreen font-poppins text-white rounded-md text-center cursor-pointer"
             onClick={handleSubmitPost}

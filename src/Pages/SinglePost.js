@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { AiFillCloseCircle, AiTwotoneSave } from "react-icons/ai";
 import { BiUpvote } from "react-icons/bi";
 import { FaCommentAlt } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { axios_auth } from "../Library/Library";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "timeago.js";
+import { UserContext } from "../Context/UserProfile";
 // import parse from "html-react-parser";
 
 const SinglePost = ({
@@ -23,6 +24,7 @@ const SinglePost = ({
     useState(loggedUserData);
   const [comment, setComment] = useState("");
   const [allComment, setAllComment] = useState();
+  const {userDetails} = useContext(UserContext)
 
   const closingHandler = (e) => {
     updateState(e, false);
@@ -81,8 +83,9 @@ const SinglePost = ({
           data
         );
         toast.success("comment added successfully");
-        console.log(response.data.result);
-      } catch (error) {
+        console.log((await response).data.savedComment);
+        sendRequestComment().then((data) => setAllComment(data.comments))
+            } catch (error) {
         console.log("Error:", error);
       }
     };

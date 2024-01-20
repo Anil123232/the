@@ -8,6 +8,7 @@ import { IoLocation } from "react-icons/io5";
 import { BiUpvote } from "react-icons/bi";
 
 const Card = ({
+  modal,
   setShowModal,
   updateState,
   postData,
@@ -33,7 +34,7 @@ const Card = ({
   };
   useEffect(() => {
     sendRequestComment().then((data) => setAllComment(data.comments.length));
-  }, []);
+  }, [modal]);
 
 
   return (
@@ -73,7 +74,7 @@ const Card = ({
                 {postOwner.fullname}
               </span>
               <span className="text-xs font-thin">
-                {format(postData?.updatedAt)}`
+                {format(postData?.createdAt)}`
               </span>
             </div>
           </div>

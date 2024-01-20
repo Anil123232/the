@@ -14,5 +14,18 @@ export const axios_auth = axios.create({
     },
   });
 
+  export const dateFormat = (date, includeDay = false) => {
+    if (!date) return null;
+    const d = new Date(date);
+    const month = d.toLocaleString('default', { month: 'short' });
+    const day = d.getDate();
+    const year = d.getFullYear();
+    let dayOfWeek = null;
+    if (includeDay) {
+      dayOfWeek = d.toLocaleString('default', { weekday: 'short' });
+    }
+    return ` ${dayOfWeek? dayOfWeek+',':''} ${month} ${day}, ${year}`;
+  };
+
 
 
